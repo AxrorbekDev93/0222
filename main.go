@@ -1,7 +1,6 @@
 package main
 
 import (
-import (
 	"github.com/AxrorbekDev93/0222/db"
 	"github.com/AxrorbekDev93/0222/handlers"
 	"github.com/AxrorbekDev93/0222/middleware"
