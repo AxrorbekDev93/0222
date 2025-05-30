@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/AxrorbekDev93/go-apps/db"
-	"github.com/AxrorbekDev93/go-apps/handlers"
-	"github.com/AxrorbekDev93/go-apps/middleware"
+import (
+	"github.com/AxrorbekDev93/0222/db"
+	"github.com/AxrorbekDev93/0222/handlers"
+	"github.com/AxrorbekDev93/0222/middleware"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
