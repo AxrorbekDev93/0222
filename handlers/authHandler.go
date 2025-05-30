@@ -6,8 +6,9 @@ import (
 	"go-api/db"
 	"go-api/utils"
 
-	"github.com/gofiber/fiber/v2"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/AxrorbekDev93/0222/db"
+	"github.com/AxrorbekDev93/0222/utils"
+
 )
 
 type AuthInput struct {
