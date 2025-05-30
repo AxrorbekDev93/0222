@@ -1,4 +1,4 @@
-package main
+package db // ✅ обязательно
 
 import (
 	"database/sql"
