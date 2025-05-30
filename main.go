@@ -1,35 +1,32 @@
 package main
-import "github.com/AxrorbekDev93/go-apps/db"
+
 import (
-	"go-api/handlers"
-	"go-api/middleware"
+	"github.com/AxrorbekDev93/go-apps/db"
+	"github.com/AxrorbekDev93/go-apps/handlers"
+	"github.com/AxrorbekDev93/go-apps/middleware"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"os"
 )
 
 func main() {
 	app := fiber.New()
 
-	// Разрешить CORS
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
 	}))
 
-	// Подключение к БД
 	db.Connect()
 
-	// Главная страница
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("🚀 Сервер Go работает!")
+		return c.SendString("🚀 Сервер Go работает на Render!")
 	})
 
-	// 🔓 Открытая регистрация и логин
 	app.Post("/register", handlers.RegisterUser)
 	app.Post("/login", handlers.Login)
 
-	// 🔐 Пользователи (только авторизованные)
 	app.Get("/users", middleware.Protect(), handlers.GetUsers)
 	app.Patch("/users/:id", middleware.Protect(), handlers.UpdateUserBySuperAdmin)
 	app.Patch("/users/:id/status", middleware.Protect(), handlers.UpdateUserStatus)
@@ -43,10 +40,12 @@ func main() {
 	app.Post("/diesel-oil", middleware.Protect(), handlers.AddDieselOil)
 	app.Delete("/diesel-oil/:id", middleware.Protect(), handlers.DeleteDieselOil)
 
-	// 📋 Депо (получить и добавить)
 	app.Get("/depos", handlers.GetDepos)
 	app.Post("/depos", middleware.Protect(), handlers.CreateDepo)
 
-	// Запуск сервера
-	app.Listen(":4000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "4000"
+	}
+	app.Listen(":" + port)
 }
